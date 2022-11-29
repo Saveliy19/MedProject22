@@ -1,0 +1,39 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>Твое здоровье</title>
+      {% endif %}
+    </head>
+    <body>
+      <div>
+        <img src="{{ url_for ('static', filename='images/pilyulya.png') }}" title = "YH" width="35">
+          Твое здоровье:
+          <a href="/">На главную</a>
+          {% if current_user.is_anonymous %}
+          <a href="{{ url_for('login') }}">Войти</a>
+          {% else %}
+          <a href="{{ url_for('logout') }}">Выйти</a>
+          
+          {% if  current_user.role == "cl" %}
+          <a href="{{ url_for('client', username=current_user.sertificate) }}">Профиль</a>
+          {% else %}
+          <a href="{{ url_for('doctor', username=current_user.login) }}">Профиль</a>
+          {% endif %}
+
+          {% endif %}
+      </div>
+      <hr>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+  </body>
+</html>

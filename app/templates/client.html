@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ user.name }}</h1>
+    <hr>
+    <p>Номер полиса - {{ user.sertificate }}</p>
+    <p>Дата рождения - {{ user.birthdate }}</p>
+    <p>Пол - </p>
+    <h2>Записи на прием</h2>
+    <h2>Живая очередь</h2>
+    <h2><a href="{{ url_for('index') }}">Моя медицинская карта(заменить переход)</a></h2>
+{% endblock %}

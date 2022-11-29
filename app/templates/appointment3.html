@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Запись на прием</h1>
+    <form action="" method="post"  novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.day.label }}<br>
+            {{ form.day }}<br>
+            {% for error in form.day.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.month.label }}<br>
+            {{ form.month }}<br>
+            {% for error in form.month.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.year.label }}<br>
+            {{ form.year }}<br>
+            {% for error in form.year.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.time.label }}<br>
+            {{ form.time }}<br>
+            {% for error in form.time.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

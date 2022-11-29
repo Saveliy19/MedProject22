@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Наши специалисты</h3>
+    <ul>
+        {% for s in spec %}
+            <li><span style="color: black;">{{ s }}</span></li>
+        {% endfor %}
+    </ul>
+    <p><a href="{{ url_for('appointment1', username=current_user.sertificate) }}">Записаться на прием</a></p>
+{% endblock %}
