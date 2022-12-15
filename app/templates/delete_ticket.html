@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Отменить запись</h1>
+    <p>Вы действительно хотите отменить запись к врачу : {{ doctor }}</p>
+    <p>На дату: {{ date }}</p>
+    <p>На время: {{ time }}</p>
+    <form action="" method="post"  novalidate>
+        {{ form.hidden_tag() }}
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

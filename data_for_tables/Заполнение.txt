@@ -1,0 +1,10 @@
+\copy "SPECIALIZATION"("NAME") FROM 'D:\MedProject\data_for_tables\specialization.csv' DELIMITER ',' CSV HEADER
+\copy "DOCTOR"("LOGIN", "FIO", "PASSWORD", "BIRTHDATE", "SEX") FROM 'D:\MedProject\data_for_tables\doctors.csv' DELIMITER ';' CSV HEADER
+\copy "DOCTOR_SPECIALIZATION"("DOC_ID", "SPECIALIZATION_ID", "DOC_LOGIN") FROM 'D:\MedProject\data_for_tables\doctor_specialization.csv' DELIMITER ';' CSV HEADER
+\copy "SERVICE"("NAME") FROM 'D:\MedProject\data_for_tables\services.csv' DELIMITER ';' CSV HEADER
+\copy "DOCTOR_SERVICE"("DOC_ID", "SERVICE_ID", "DOC_LOGIN") FROM 'D:\MedProject\data_for_tables\doctor_services.csv' DELIMITER ';' CSV HEADER
+
+
+GRANT ALL ON DATABASE medical_service TO sav;
+GRANT ALL ON SCHEMA public TO sav;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO sav;

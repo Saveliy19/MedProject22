@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <img src="{{ url_for ('static', filename='images/user.png') }}" title = "YH" width="300">
     <h1>{{ user.name }}</h1>
     <hr>
     <p>Номер полиса - {{ user.sertificate }}</p>
     <p>Дата рождения - {{ user.birthdate }}</p>
-    <p>Пол - </p>
-    <h2>Записи на прием</h2>
-    <h2>Живая очередь</h2>
-    <h2><a href="{{ url_for('index') }}">Моя медицинская карта(заменить переход)</a></h2>
+    <p>Пол - {{ user.sex }}</p>
+    
+    <h2>Мои записи на прием</h2>
+        {% for l in ticket_lst %}
+            <hr>
+            <li><span style="color: black;">Вы записаны к доктору: {{ l[2] }}</span></li>
+            <li><span style="color: black;">Дата: {{ l[0] }}</span></li>
+            <li><span style="color: black;">Время: {{ l[1] }}</span></li>
+            <li><span style="color: black;">На услугу: {{ l[3] }}</span></li>
+            <li><a href="{{url_for('delete_ticket', doctor=l[2], username=current_user.sertificate, date=l[0], time=l[1])}}"><span style="color: black;">Отменить запись</span></a></li>
+        {% endfor %}
+    <h4><a href="{{ url_for('medical_card', username=user.sertificate) }}">Посмотреть медицинскую карту</a></h4>
+    <h5><a href="{{ url_for('edit_profile', login=user.sertificate) }}">Изменить пароль</a></h5>
 {% endblock %}
+
+

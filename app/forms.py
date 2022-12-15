@@ -4,7 +4,7 @@
 
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, FieldList, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SelectField, DateField, TimeField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
 from app.models import User
 from datetime import datetime
@@ -22,9 +22,8 @@ class RegistrationForm(FlaskForm):
     lastname = StringField('Фамилия', validators=[DataRequired()])
     firstname = StringField('Имя', validators=[DataRequired()])
     patronymic = StringField('Отчество', validators=[DataRequired()])
-    day = StringField('День', validators=[DataRequired()])
-    year = StringField('Год', validators=[DataRequired()])
-    month = StringField('Месяц', validators=[DataRequired()])
+    birthdate = DateField('Дата рождения', format = '%Y-%m-%d')
+    sex = SelectField('Пол', choices=[(1,'Муж'), (2,'Жен')])
     username = StringField('Номер полиса', validators=[DataRequired()])
     password1 = PasswordField('Пароль', validators=[DataRequired()])
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password1')])
@@ -38,14 +37,14 @@ class RegistrationForm(FlaskForm):
 
 # форма редактирования профиля
 class EditProfileForm(FlaskForm):
-    username = StringField('Логин', validators=[DataRequired()])
     password = PasswordField('Старый пароль', validators=[DataRequired()])
     newpassword1 = PasswordField('Новый пароль', validators=[DataRequired()])
-    newpassword1 = PasswordField('Повторите новый пароль', validators=[DataRequired()])
-    submit = SubmitField('Изменить информацию о пользователе')
+    newpassword2 = PasswordField('Повторите новый пароль', validators=[DataRequired(), EqualTo('newpassword1')])
+    submit = SubmitField('Завершить редактирование')
+
 
 class Appointment1(FlaskForm):
-    specialization = SelectField('Выберите услугу') #coerce=int
+    specialization = SelectField('Выберите профиль врача') #coerce=int
     submit = SubmitField('Далее')
 
 class Appointment2(FlaskForm):
@@ -53,11 +52,9 @@ class Appointment2(FlaskForm):
     submit = SubmitField('Далее')
 
 class Appointment3(FlaskForm):
-    day = StringField('День приема', validators=[DataRequired()])
-    year = StringField('Год приема', validators=[DataRequired()])
-    month = StringField('Месяц', validators=[DataRequired()])
-    time = StringField('Выберите время приема', validators=[DataRequired()])
-    submit = SubmitField('Записаться')
+    day = DateField('День приема', format = '%Y-%m-%d')
+    time = TimeField('Выберите время приема')
+    submit = SubmitField('Подтвердить запись')
 
     '''def validate_day(self, day):
         if int(day.data) < int(datetime.date()):
@@ -68,3 +65,13 @@ class Appointment3(FlaskForm):
         if int(time.data) < 9 or int(time.data) > 19:
             raise ValidationError('Просмотрите часы работы клиники!')
         return'''
+class Appointment4(FlaskForm):
+    service = SelectField('Выберите услугу')
+    submit = SubmitField('Далее')
+
+class Priem(FlaskForm):
+    description = TextAreaField('Введите данный в медицинскую карту пациента', validators=[DataRequired()])
+    submit = SubmitField('Закончить прием')
+
+class DeleteTicket(FlaskForm):
+    submit = SubmitField('Отменить запись')

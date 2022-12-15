@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Список специалистов</h1>
+    <h4>Здесь Вы можете ознакомиться со специалистами, предоставляющими услугу: {{service}}</h4>
+    {% for s in specialists %}
+        <p><a href="{{ url_for('specialist_name_services', name=s) }}"><span style="color: black;">{{ s }}</span></a></p>
+    {% endfor %}
+
+    <p><a href="{{ url_for('appointment1', username=current_user.sertificate) }}">Записаться на прием</a></p>
+{% endblock %}

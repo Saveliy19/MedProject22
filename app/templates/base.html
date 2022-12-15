@@ -1,30 +1,42 @@
+
 <html>
     <head>
+      <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
       {% if title %}
       <title>{{ title }}</title>
       {% else %}
-      <title>Твое здоровье</title>
+      <title>Здоровье</title>
       {% endif %}
+      <link rel="shortcut icon" href="{{ url_for ('static', filename='images/core.png') }}" type="image/x-icon">
+      <link rel="stylesheet" href="{{ url_for ('static', filename='style.css') }}">
+
     </head>
     <body>
-      <div>
-        <img src="{{ url_for ('static', filename='images/pilyulya.png') }}" title = "YH" width="35">
-          Твое здоровье:
-          <a href="/">На главную</a>
+      <div class="header">
+        <div class="header-container">
+          <a href="/"><img src="{{ url_for ('static', filename='images/core.png') }}" title = "YH" width="35"></a>
+          <div class="header-nav">
+            <div class="header-auth">
           {% if current_user.is_anonymous %}
           <a href="{{ url_for('login') }}">Войти</a>
           {% else %}
           <a href="{{ url_for('logout') }}">Выйти</a>
-          
+          </div>
+          <div class="header-profile">
           {% if  current_user.role == "cl" %}
           <a href="{{ url_for('client', username=current_user.sertificate) }}">Профиль</a>
+          <a href="{{ url_for('appointment1', username=current_user.sertificate) }}">Записаться на прием</a>
           {% else %}
           <a href="{{ url_for('doctor', username=current_user.login) }}">Профиль</a>
           {% endif %}
-
+          </div>
+        </div>
           {% endif %}
+          
+          </div>
       </div>
-      <hr>
+      <section class="main">
+        <div class="main-content">
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       <ul>
@@ -35,5 +47,8 @@
       {% endif %}
       {% endwith %}
       {% block content %}{% endblock %}
+      </div>
+      </section>
+      <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
   </body>
 </html>

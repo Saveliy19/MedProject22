@@ -27,23 +27,16 @@
         </p>
         <h4>Ваша дата рождения</h4>
         <p>
-            {{ form.day.label }}<br>
-            {{ form.day(size=32) }}<br>
-            {% for error in form.day.errors %}
+            {{ form.birthdate.label }}<br>
+            {{ form.birthdate(size=32) }}<br>
+            {% for error in form.birthdate.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.month.label }}<br>
-            {{ form.month(size=32) }}<br>
-            {% for error in form.month.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.year.label }}<br>
-            {{ form.year(size=32) }}<br>
-            {% for error in form.year.errors %}
+            {{ form.sex.label }}<br>
+            {{ form.sex }}<br>
+            {% for error in form.sex.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

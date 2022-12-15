@@ -2,8 +2,10 @@
 
 {% block content %}
     <h1>Список услуг</h1>
-    <h4>Здесь Вы можете ознакомиться с услугами, предоставляемыми учреждением</h4>
-    {% for s in serv %}
+    <h4>Здесь Вы можете ознакомиться с услугами, предоставляемыми специалистом: {{name}}</h4>
+    {% for s in services %}
         <p><a href="{{ url_for('second_appointment2', service=s, username=current_user.sertificate) }}"><span style="color: black;">{{ s }}</span></a></p>
     {% endfor %}
+
+    
 {% endblock %}
